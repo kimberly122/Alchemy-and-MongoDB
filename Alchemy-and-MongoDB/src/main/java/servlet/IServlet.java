@@ -59,7 +59,8 @@ public class IServlet extends HttpServlet {
 		String gender = jsonObject1.get("gender").toString();
 		request.setAttribute("age", age);
 		request.setAttribute("gender", gender);
-	
+		request.setAttribute("msg", "Entry Added!");
+		request.setAttribute("result", db.getEntry());
 		
 		//JSONParser parser = new JSONParser();
 		//Object obj = parser.parse(db.getEntry());
