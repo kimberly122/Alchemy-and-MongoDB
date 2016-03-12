@@ -114,7 +114,7 @@ public class IServlet extends HttpServlet {
 		response.setContentType("text/html");
         response.setStatus(200);
 		
-        request.getRequestDispatcher("viewinfo.jsp").forward(request, response);
+        request.getRequestDispatcher("extractedinfo.jsp").forward(request, response);
 
 	}
 

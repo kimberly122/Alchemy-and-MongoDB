@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,6 +11,5 @@
 				out.println("<h3>" + request.getAttribute("extractInfo") + "</h3>");
 			}
 		%>
-		
     </body>
 </html>

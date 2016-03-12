@@ -9,15 +9,20 @@
     <body>
 		<h3> Information Extraction Complete </h3>
 		<%
-			if (request.getAttribute("age") != null){
-				out.println("<h3>" + request.getAttribute("age") + "</h3>");
+			if (request.getAttribute("extractInfo") != null){
+				out.println("<h3>" + request.getAttribute("extractInfo") + "</h3>");
 			}
 		%>
 		
-		 <%
-			if (request.getAttribute("gender") != null){
-				out.println("<h3>" + request.getAttribute("gender") + "</h3>");
-			}
-		%>
+		 <% 
+        List<String> result = (List<String>) request.getAttribute("result");
+         if (result == null) {
+        	 result = new ArrayList<String>();
+         }
+
+         for (String rs : result) {
+      %>
+        	<div><%= rs %></div>
+      <% } %>
     </body>
 </html>
