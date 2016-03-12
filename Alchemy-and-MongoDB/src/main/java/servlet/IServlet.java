@@ -41,8 +41,16 @@ public class IServlet extends HttpServlet {
 		
 		try {
 		MongoDBClient db = new MongoDBClient();
-		
 		db.addEntry(sb.toString());
+		
+		request.setAttribute("msg", "Entry Added!");
+		request.setAttribute("result", db.getEntry());
+		
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(sb.toString());
+            
+		JSONObject jsonObject = (JSONObject) obj;
+		System.out.println(jsonObject.toString());
 		}
 		catch (Exception e) {
 				e.printStackTrace(System.err);
@@ -83,7 +91,7 @@ public class IServlet extends HttpServlet {
 	
 		response.setContentType("text/html");
         response.setStatus(200);
-        request.getRequestDispatcher("extractedinfo.jsp").forward(request, response);
+        request.getRequestDispatcher("viewinfo.jsp").forward(request, response);
 
 	}
 
