@@ -3,6 +3,7 @@ package servlet;
 import connector.AlchemyConnector;
 import connector.MongoDBClient;
 import java.io.*;
+import java.util.*;
 import java.net.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,14 +44,35 @@ public class IServlet extends HttpServlet {
 		MongoDBClient db = new MongoDBClient();
 		db.addEntry(sb.toString());
 		
-		request.setAttribute("msg", "Entry Added!");
-		request.setAttribute("result", db.getEntry());
-		
+		List<String> dbEntry = db.getEntry();
 		JSONParser parser = new JSONParser();
-		Object obj = parser.parse(sb.toString());
-            
+		Object obj = new Object();
 		JSONObject jsonObject = (JSONObject) obj;
-		System.out.println(jsonObject.toString());
+		JSONArray jsonArray = (JSONArray) jsonObject.get(dbEntry);
+		JSONObject jsonObject1 = new JSONObject();
+		for(int i=0;i<=dbEntry.size();i++){
+			if(i == dbEntry.size()){
+				jsonObject1 = (JSONObject) jsonArray.get(i);
+			}
+		}
+		String age = jsonObject1.get("age").toString();
+		String gender = jsonObject1.get("gender").toString();
+		request.setAttribute("age", age);
+		request.setAttribute("gender", gender);
+	
+		
+		//JSONParser parser = new JSONParser();
+		//Object obj = parser.parse(db.getEntry());
+            
+		//JSONObject jsonObject = (JSONObject) obj;
+		//System.out.println(jsonObject.toString());
+		/*
+		JSONArray jsonArray = (JSONArray) jsonObject.get(db.getEntry());
+		for(int i=0;i<db.getEntry().size();i++){
+		JSONObject jsonObject1 = (JSONObject) jsonArray.get(0);
+		String age = jsonObject1.get("age").toString();
+		}*/
+		//request.setAttribute("age", character_count);
 		}
 		catch (Exception e) {
 				e.printStackTrace(System.err);
@@ -91,7 +113,8 @@ public class IServlet extends HttpServlet {
 	
 		response.setContentType("text/html");
         response.setStatus(200);
-        request.getRequestDispatcher("viewinfo.jsp").forward(request, response);
+		
+        request.getRequestDispatcher("extractedinfo.jsp").forward(request, response);
 
 	}
 
