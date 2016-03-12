@@ -1,6 +1,7 @@
 package servlet;
 
 import connector.AlchemyConnector;
+import connector.MongoDBClient;
 import java.io.*;
 import java.net.*;
 import javax.servlet.ServletException;
@@ -37,7 +38,15 @@ public class IServlet extends HttpServlet {
 			sb.append(line);
 		}
 		request.setAttribute("extractInfo",sb.toString());
-
+		
+		try {
+		MongoDBClient db = new MongoDBClient();
+		
+		db.addEntry(sb.toString());
+		}
+		catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
 		//ImageFaces image_faces = service.recognizeFaces(input_url,false);
 		//request.setAttribute("image_faces",image_faces);
 		
@@ -74,7 +83,7 @@ public class IServlet extends HttpServlet {
 	
 		response.setContentType("text/html");
         response.setStatus(200);
-        request.getRequestDispatcher("viewinfo.jsp").forward(request, response);
+        request.getRequestDispatcher("extractedinfo.jsp").forward(request, response);
 
 	}
 

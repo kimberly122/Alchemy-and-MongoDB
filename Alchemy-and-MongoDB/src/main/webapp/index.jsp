@@ -8,7 +8,7 @@
     <body>
 		<form action="IServlet" method="GET">
             <input type="text" name="imageURL" size="80">
-			<input type="submit" value="Extract">
+			<input type="submit" value="Extract Information">
         </form> <br/>
 		<%
 			if (request.getAttribute("extractInfo") != null){
